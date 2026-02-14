@@ -272,7 +272,7 @@ blocks:
       \ of your block. The arguments to __init__  will\nbe the parameters. All of\
       \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
       from gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\n    def __init__(self,\
-      \ window_size=10000):\n        gr.sync_block.__init__(\n            self,\n\
+      \ window_size=100000):\n        gr.sync_block.__init__(\n            self,\n\
       \            name='BER for QPSK',\n            in_sig=[np.byte, np.byte],\n\
       \            out_sig=[np.float32]\n        )\n\n        self.window_size = int(window_size)\n\
       \        self.window = np.zeros(self.window_size, dtype=np.float32)\n      \
@@ -292,9 +292,9 @@ blocks:
     comment: Block updated 2/14/2026
     maxoutbuf: '0'
     minoutbuf: '0'
-    window_size: 1e5
+    window_size: 1e6
   states:
-    _io_cache: ('BER for QPSK', 'blk', [('window_size', '10000')], [('0', 'byte',
+    _io_cache: ('BER for QPSK', 'blk', [('window_size', '100000')], [('0', 'byte',
       1), ('1', 'byte', 1)], [('0', 'float', 1)], '', ['window_size'])
     bus_sink: false
     bus_source: false
