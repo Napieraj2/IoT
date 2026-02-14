@@ -9,5 +9,5 @@ A collection of Internet of Things lab exercises covering sensors, RFID, and sig
 - LABS/LAB1/TEMP – DHT11 temperature and humidity sensor scripts with a lightweight driver module.
 - LABS/LAB2/GRC – GNU Radio Companion flowgraphs and related assets for the second lab series.
 
-Each lab folder contains self-contained Python modules or GNU Radio project files. Refer to the individual subdirectories for setup instructions and usage details.
+Each lab folder contains self-contained Python modules or GNU Radio project files. Runtime setup notes live in [LABS/LAB1/README.md](LABS/LAB1/README.md) and [LABS/LAB2/README.md](LABS/LAB2/README.md).
 
