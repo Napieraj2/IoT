@@ -272,7 +272,7 @@ blocks:
       \ of your block. The arguments to __init__  will\nbe the parameters. All of\
       \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
       from gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\n    def __init__(self,\
-      \ window_size=10000):\n        gr.sync_block.__init__(\n            self,\n\
+      \ window_size=100000):\n        gr.sync_block.__init__(\n            self,\n\
       \            name='BER for QPSK',\n            in_sig=[np.byte, np.byte],\n\
       \            out_sig=[np.float32]\n        )\n\n        self.window_size = int(window_size)\n\
       \        self.window = np.zeros(self.window_size, dtype=np.float32)\n      \
@@ -285,16 +285,16 @@ blocks:
       \  for k in range(n):\n            self.window[self.win_ptr] = biterrors[k]\n\
       \            self.win_ptr = (self.win_ptr + 1) % self.window_size\n\n      \
       \  # True BER per bit (2 bits per QPSK symbol)\n        BER = np.sum(self.window)\
-      \ / self.window_size\n\n        # Must output exactly n samples\n        output_items[0][:]\
-      \ = BER\n\n        return len(output_items[0])\n"
+      \ / (2*self.window_size)\n\n        # Must output exactly n samples\n      \
+      \  output_items[0][:] = BER\n\n        return len(output_items[0])\n"
     affinity: ''
     alias: ''
     comment: Block updated 2/14/2026
     maxoutbuf: '0'
     minoutbuf: '0'
-    window_size: 1e5
+    window_size: 1e6
   states:
-    _io_cache: ('BER for QPSK', 'blk', [('window_size', '10000')], [('0', 'byte',
+    _io_cache: ('BER for QPSK', 'blk', [('window_size', '100000')], [('0', 'byte',
       1), ('1', 'byte', 1)], [('0', 'float', 1)], '', ['window_size'])
     bus_sink: false
     bus_source: false
@@ -316,7 +316,7 @@ blocks:
       \        y = output_items[0]\n\n        I = (np.real(x) >= 0).astype(np.uint8)\n\
       \        Q = (np.imag(x) >= 0).astype(np.uint8)\n\n        # quad code: BL=0,\
       \ BR=1, TL=2, TR=3\n        quad = (Q << 1) | I\n\n        # map quad -> QPSK_MAP\
-      \ index: BL->0, BR->1, TL->3, TR->2\n        lut = np.array([0, 1, 2, 3], dtype=np.uint8)\n\
+      \ index: BL->0, BR->1, TL->2, TR->3\n        lut = np.array([0, 1, 2, 3], dtype=np.uint8)\n\
       \        y[:] = lut[quad]\n\n        return len(output_items[0])\n"
     affinity: ''
     alias: ''
@@ -568,7 +568,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    bit_per_symbol: '1'
+    bit_per_symbol: '2'
     comment: 'Use this ground-truth block to
 
       check the correctness of your code.'
