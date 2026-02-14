@@ -311,7 +311,7 @@ blocks:
       \ them are required to have default values!\n\"\"\"\nimport numpy as np\nfrom\
       \ gnuradio import gr\n\nclass blk(gr.sync_block):\n    def __init__(self):\n\
       \        gr.sync_block.__init__(\n            self,\n            name='QPSK\
-      \ Decoder',\n            in_sig=[np.complex64],\n            out_sig=[np.uint8]\n\
+      \ Decoder (Gray)',\n            in_sig=[np.complex64],\n            out_sig=[np.uint8]\n\
       \        )\n\n    def work(self, input_items, output_items):\n        x = input_items[0]\n\
       \        y = output_items[0]\n\n        I = (np.real(x) >= 0).astype(np.uint8)\n\
       \        Q = (np.imag(x) >= 0).astype(np.uint8)\n\n        # quad code: BL=0,\
@@ -324,8 +324,8 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
-    _io_cache: ('QPSK Decoder', 'blk', [], [('0', 'complex', 1)], [('0', 'byte', 1)],
-      '', [])
+    _io_cache: ('QPSK Decoder (Gray)', 'blk', [], [('0', 'complex', 1)], [('0', 'byte',
+      1)], '', [])
     bus_sink: false
     bus_source: false
     bus_structure: null
